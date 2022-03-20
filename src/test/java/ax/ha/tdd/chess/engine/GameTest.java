@@ -235,4 +235,21 @@ public class GameTest {
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
+
+    @Test
+    public void testKnightMoveInvalid(){
+        Game game = new Game();
+        game.move("b1-b3");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("b1-d2");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("b1-d3");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("b1-d1");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+    }
 }
