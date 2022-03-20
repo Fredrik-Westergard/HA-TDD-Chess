@@ -18,7 +18,12 @@ public class Knight extends ChessPiece{
             return knightMovement(destination);
         }
         else{
-            System.out.println("knight wants to eat a piece");
+            ChessPiece piece;
+            if((piece = chessboard.getPiece(destination)) != null){
+                if(piece.getPlayer() != getPlayer()){
+                    return knightMovement(destination);
+                }
+            }
         }
 
         return false;

@@ -252,4 +252,24 @@ public class GameTest {
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
+
+    @Test
+    public void testKnightEatKnight(){
+        Game game = new Game();
+        game.move("b1-a3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("b8-c6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("a3-c4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("c6-e5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("c4-e5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+    }
 }
