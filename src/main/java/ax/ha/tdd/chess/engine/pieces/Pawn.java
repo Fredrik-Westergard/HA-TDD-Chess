@@ -37,7 +37,7 @@ public class Pawn extends ChessPiece{
                     return chessboard.getPiece(new Coordinates(destination.getX(), destination.getY() - reverse)) == null;
                 }
                 else{
-                    return !moveTwoSpaces && location.getY() == destination.getY() - reverse;
+                    return location.getY() == destination.getY() - reverse;
                 }
             }
         }
