@@ -11,11 +11,6 @@ public class Pawn extends ChessPiece{
     }
 
     @Override
-    public String getSymbol() {
-        return pieceType.getSymbol();
-    }
-
-    @Override
     public boolean canMove(Chessboard chessboard, Coordinates destination) {
         boolean moveTwoSpaces = false;
 

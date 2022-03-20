@@ -10,11 +10,6 @@ public class Rook extends ChessPiece{
     }
 
     @Override
-    public String getSymbol() {
-        return pieceType.getSymbol();
-    }
-
-    @Override
     public boolean canMove(Chessboard chessboard, Coordinates destination) {
 
         if(chessboard.getPiece(destination) == null){

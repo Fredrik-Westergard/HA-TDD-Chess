@@ -20,7 +20,9 @@ public abstract class ChessPiece {
         this.location = location;
     }
 
-    public abstract String getSymbol();
+    public String getSymbol(){
+        return pieceType.getSymbol();
+    }
 
     public PieceType getPieceType() { return pieceType; }
 
