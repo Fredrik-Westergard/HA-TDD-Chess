@@ -166,4 +166,26 @@ public class GameTest {
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
     }
+
+    @Test
+    public void testRookHasObstacle(){
+        Game game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "a1-a4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "a2-a4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "a8-a3";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "a8-a1";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+    }
 }
