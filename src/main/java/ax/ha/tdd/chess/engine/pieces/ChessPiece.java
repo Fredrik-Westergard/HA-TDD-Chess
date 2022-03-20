@@ -36,6 +36,9 @@ public abstract class ChessPiece {
         this.location = location;
     }
 
+    public boolean isDestinationPieceDifferentColor(Chessboard chessboard, Coordinates destination){
+        return chessboard.getPiece(destination).getPlayer() != chessboard.getPiece(location).getPlayer();
+    }
 
     /**
      * Suggestion of design:

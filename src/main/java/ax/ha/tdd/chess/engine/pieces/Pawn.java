@@ -17,9 +17,6 @@ public class Pawn extends ChessPiece{
 
     @Override
     public boolean canMove(Chessboard chessboard, Coordinates destination) {
-
-        Coordinates location = super.getLocation();
-        Player player = super.getPlayer();
         boolean moveTwoSpaces = false;
 
         int reverse = 1;
@@ -41,7 +38,7 @@ public class Pawn extends ChessPiece{
                 }
             }
         }
-        else if(chessboard.getPiece(destination).getPlayer() != chessboard.getPiece(location).getPlayer()){
+        else if(isDestinationPieceDifferentColor(chessboard, destination)){
             if(location.getX() == destination.getX()+1 || location.getX() == destination.getX()-1){
                 return location.getY() == destination.getY() - reverse;
             }
