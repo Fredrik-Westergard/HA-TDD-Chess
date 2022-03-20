@@ -21,7 +21,9 @@ public class Rook extends ChessPiece{
             return isClearLine(chessboard, destination);
         }
         else{
-            System.out.println("eat other piece");
+            if(chessboard.getPiece(destination).getPlayer() != player){
+                return isClearLine(chessboard, destination);
+            }
         }
 
         return false;
@@ -29,7 +31,7 @@ public class Rook extends ChessPiece{
 
     private boolean isClearLine(Chessboard chessboard, Coordinates destination){
         if(location.getX() == destination.getX()){
-            int yTo = Math.min(location.getY(), destination.getY())+1;
+            int yTo = Math.min(location.getY(), destination.getY());
             for(int yFrom = Math.max(location.getY(), destination.getY())-1;yFrom > yTo; yFrom--){
                 if(chessboard.getPiece(new Coordinates(location.getX(),yFrom)) != null){
                     return false;
@@ -38,7 +40,7 @@ public class Rook extends ChessPiece{
             return true;
         }
         else if(location.getY() == destination.getY()){
-            int xTo = Math.min(location.getX(), destination.getX())+1;
+            int xTo = Math.min(location.getX(), destination.getX());
             for(int xFrom = Math.max(location.getY(), destination.getX())-1;xFrom > xTo; xFrom--){
                 if(chessboard.getPiece(new Coordinates(xFrom,location.getY())) != null){
                     return false;

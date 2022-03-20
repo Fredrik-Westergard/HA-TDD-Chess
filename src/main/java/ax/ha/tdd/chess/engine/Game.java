@@ -69,7 +69,7 @@ public class Game {
             //if there is a piece
             if(piece != null){
                 //if it's a piece of the players color
-                if(piece.getPlayer() == this.getPlayerToMove()){
+                if(piece.getPlayer() == getPlayerToMove()){
                     //and if the piece can move, move the piece, change player and set last move to successful
                     if(piece.canMove(board,end)){
                         ChessPiece pieceToBeEaten;
