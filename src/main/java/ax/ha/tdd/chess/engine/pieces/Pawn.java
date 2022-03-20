@@ -41,6 +41,11 @@ public class Pawn extends ChessPiece{
                 }
             }
         }
+        else if(chessboard.getPiece(destination).getPlayer() != chessboard.getPiece(location).getPlayer()){
+            if(location.getX() == destination.getX()+1 || location.getX() == destination.getX()-1){
+                return location.getY() == destination.getY() - reverse;
+            }
+        }
 
         return false;
     }

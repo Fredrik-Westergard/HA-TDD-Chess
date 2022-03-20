@@ -72,6 +72,10 @@ public class Game {
                 if(piece.getPlayer() == this.getPlayerToMove()){
                     //and if the piece can move, move the piece, change player and set last move to successful
                     if(piece.canMove(board,end)){
+                        ChessPiece pieceToBeEaten;
+                        if((pieceToBeEaten = board.getPiece(end)) != null){
+                            board.removePiece(pieceToBeEaten);
+                        }
                         board.removePiece(piece);
                         piece.setLocation(end);
                         board.addPiece(piece);
