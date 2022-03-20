@@ -59,7 +59,7 @@ public class Game {
             System.out.println("queen side castling");
         }
         //if regular move
-        else if(Pattern.matches("[A-H][0-8]-[A-H][0-8]", move)){
+        else if(Pattern.matches("[A-H][1-8]-[A-H][1-8]", move)){
             //get the coordinates for start/end
             Coordinates start = new Coordinates(move.charAt(0)-65, 8-(move.charAt(1)-48));
             Coordinates end = new Coordinates(move.charAt(3)-65, 8-(move.charAt(4)-48));
