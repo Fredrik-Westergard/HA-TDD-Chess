@@ -38,4 +38,14 @@ public class GameTest {
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
     }
 
+    @Test
+    public void testChangePlayerToMoveAfterSuccessfulMove(){
+        Game game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "a2-a4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+    }
+
 }
