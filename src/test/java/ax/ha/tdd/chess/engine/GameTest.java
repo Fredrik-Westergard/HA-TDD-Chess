@@ -48,4 +48,18 @@ public class GameTest {
         assertEquals(game.getPlayerToMove(), Player.BLACK);
     }
 
+
+    @Test
+    public void testMoveBlackPawnAfterWhiteMove(){
+        Game game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "a2-a4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "b7-b5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+    }
 }

@@ -21,7 +21,7 @@ public class Game {
         return playerToMove;
     }
 
-    public void setPlayerToMove(Player p){
+    private void setPlayerToMove(Player p){
         this.playerToMove = p;
     }
 
