@@ -13,18 +13,18 @@ public class Rook extends ChessPiece{
     public boolean canMove(Chessboard chessboard, Coordinates destination) {
 
         if(chessboard.getPiece(destination) == null){
-            return isClearLine(chessboard, destination);
+            return isClearHorizontal(chessboard, destination);
         }
         else{
             if(chessboard.getPiece(destination).getPlayer() != player){
-                return isClearLine(chessboard, destination);
+                return isClearHorizontal(chessboard, destination);
             }
         }
 
         return false;
     }
 
-    private boolean isClearLine(Chessboard chessboard, Coordinates destination){
+    private boolean isClearHorizontal(Chessboard chessboard, Coordinates destination){
         if(location.getX() == destination.getX()){
             int yTo = Math.min(location.getY(), destination.getY());
             for(int yFrom = Math.max(location.getY(), destination.getY())-1;yFrom > yTo; yFrom--){
