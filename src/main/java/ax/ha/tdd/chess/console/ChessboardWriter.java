@@ -8,27 +8,56 @@ public class ChessboardWriter {
 
     public String print(final Chessboard chessboard) {
         final StringBuilder stringBuilder = new StringBuilder();
-        for (int y = 0; y < 8 ; y++) {
-            for (int x = 0; x < 8 ; x++) {
-                final ChessPiece chessPiece = chessboard.getPiece(new Coordinates(x, y));
-                if (chessPiece == null) {
-                    stringBuilder.append(" * ");
+        for (int y = 0; y < 9 ; y++) {
+            for (int x = 0; x < 9 ; x++) {
+                if(y == 0 || x == 0) {
+                    if(y == 0 && x == 0){
+                        stringBuilder.append("    ");
+                    }
+                    else if(y == 0){
+                        stringBuilder.append(" ");
+                        stringBuilder.append(((char)(64+x)));
+                        stringBuilder.append("   ");
+                    }
+                    else{
+                        if(y == 1){
+                            stringBuilder.append("\n");
+                        }
+                        stringBuilder.append(y);
+                        stringBuilder.append("  | ");
+                    }
                 }
-                else {
-                    stringBuilder.append(chessPiece.getPlayer().getSymbol())
-                            .append("-")
-                            .append(chessPiece.getSymbol());
-                }
+                else{
+                    final ChessPiece chessPiece = chessboard.getPiece(new Coordinates(x-1, y-1));
+                    if (chessPiece == null) {
+                        stringBuilder.append(" * ");
+                    } else {
+                        stringBuilder.append(chessPiece.getPlayer().getSymbol())
+                                .append("-")
+                                .append(chessPiece.getSymbol());
+                    }
 
-                if (x < 7) {
-                    stringBuilder.append("  ");
+                    if (x < 8) {
+                        stringBuilder.append("  ");
+                    }
                 }
             }
-            stringBuilder.append("\n");
-            if (y < 7) {
+            if(y == 0){
                 stringBuilder.append("\n");
             }
+            else {
+                stringBuilder.append(" |\n");
+            }
+            if (y < 8) {
+                if(y == 0){
+                    stringBuilder.append("   +----------------------------------------+");
+                }
+                else {
+                    stringBuilder.append("   |                                        |\n");
+                }
+            }
         }
+        stringBuilder.append("   +----------------------------------------+");
         return stringBuilder.toString();
     }
 }

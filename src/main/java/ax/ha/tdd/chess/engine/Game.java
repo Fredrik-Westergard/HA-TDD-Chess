@@ -1,5 +1,6 @@
 package ax.ha.tdd.chess.engine;
 
+import ax.ha.tdd.chess.console.ChessboardWriter;
 import ax.ha.tdd.chess.engine.pieces.*;
 
 import java.util.Objects;
@@ -11,6 +12,8 @@ public class Game {
     private boolean lastMove = false;
     //indicator for which players move it is
     private Player playerToMove = Player.WHITE;
+
+    private final ChessboardWriter chessboardWriter = new ChessboardWriter();
 
     //Feel free to delete this stuff. Just for initial testing.
     boolean isNewGame = true;
@@ -55,11 +58,15 @@ public class Game {
             if(rook != null && king != null){
                 if(rook.HasNotMoved() && king.HasNotMoved()){
                     if(king.canCastle(board,true)){
+                        board.removePiece(rook);
+                        board.removePiece(king);
                         rook.setLocation(kingsCoordinates);
                         king.setLocation(rooksCoordinates);
                         setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         king.setMoved(true);
                         rook.setMoved(true);
+                        board.addPiece(rook);
+                        board.addPiece(king);
                         lastMove = true;
                     }
                 }
@@ -76,11 +83,15 @@ public class Game {
             if(rook != null && king != null) {
                 if (rook.HasNotMoved() && king.HasNotMoved()) {
                     if (king.canCastle(board, false)) {
+                        board.removePiece(rook);
+                        board.removePiece(king);
                         rook.setLocation(kingsCoordinates);
                         king.setLocation(rooksCoordinates);
                         setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         king.setMoved(true);
                         rook.setMoved(true);
+                        board.addPiece(rook);
+                        board.addPiece(king);
                         lastMove = true;
                     }
                 }
@@ -115,7 +126,10 @@ public class Game {
             }
         }
         isNewGame = false;
-        System.out.println("Player tried to perform move: " + move);
-        System.out.println("And it was: " + (lastMove?"successful":"unsuccessful"));
+        System.out.println(chessboardWriter.print(board));
+        System.out.println("   | " + playerToMove.name().toLowerCase() + " tried to perform move: " + move + (move.equals("O-O")?"       |":"     |"));
+        System.out.println("   | and it was: " + (lastMove?"successful                 |":"unsuccessful               |"));
+        System.out.println("   +----------------------------------------+");
+        System.out.println();
     }
 }
