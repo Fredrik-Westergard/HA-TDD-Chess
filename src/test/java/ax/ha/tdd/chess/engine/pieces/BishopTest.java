@@ -77,4 +77,36 @@ public class BishopTest {
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
+
+    @Test
+    public void testBishopMoveInvalid(){
+        Game game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "c1-e3";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+
+        game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d2-d4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "h7-h5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "c1-g7";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+
+        game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "c1-d2";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+    }
 }

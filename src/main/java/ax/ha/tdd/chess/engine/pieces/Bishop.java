@@ -38,9 +38,6 @@ public class Bishop extends ChessPiece{
             }
 
             for (int i = 0; i < Math.abs(location.getX() - destination.getX()); i++) {
-                System.out.println("x: " + (location.getX() + (i * reverseX)));
-                System.out.println("y: " + (location.getY() + (i * reverseY)));
-                System.out.println("diff: " + Math.abs(location.getX() - destination.getX()));
                 if (chessboard.getPiece(new Coordinates(
                         location.getX() + (i * reverseX) + reverseX,
                         location.getY() + (i * reverseY) + reverseY)) != null) {
