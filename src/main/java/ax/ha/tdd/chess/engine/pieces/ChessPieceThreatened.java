@@ -7,7 +7,12 @@ import ax.ha.tdd.chess.engine.Player;
 public class ChessPieceThreatened {
 
     public boolean isThreatened(Chessboard chessboard, Coordinates coordinates, Player player) {
+        return isThreatenedByKnight(chessboard, coordinates, player) ||
+                isThreatenedDiagonally(chessboard, coordinates, player) ||
+                isThreatenedHorizontally(chessboard, coordinates, player);
+    }
 
+    private boolean isThreatenedByKnight(Chessboard chessboard, Coordinates coordinates, Player player){
         for(int i = -2; i < 3; i++){
             if(i != 0){
                 if(i == 2 || i == -2){
@@ -52,7 +57,10 @@ public class ChessPieceThreatened {
                 }
             }
         }
+        return false;
+    }
 
+    private boolean isThreatenedHorizontally(Chessboard chessboard, Coordinates coordinates, Player player){
         for(int y = coordinates.getY()+1; y < 8; y++){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
@@ -97,37 +105,61 @@ public class ChessPieceThreatened {
                 }
             }
         }
+        return false;
+    }
+
+    private boolean isThreatenedDiagonally(Chessboard chessboard, Coordinates coordinates, Player player){
+
+        boolean[] obstacle = {false,false,false,false};
 
         for(int i = 1; i < 7; i++){
             ChessPiece piece;
             if(coordinates.getY()+i < 8){
-                if(coordinates.getX()+i < 8){
-                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()+i))) != null){
-                        if(piece.getPlayer() != player){
-                            return true;
+                if(!obstacle[0]){
+                    if(coordinates.getX()+i < 8){
+                        if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()+i))) != null){
+                            if(piece.getPlayer() != player){
+                                return true;
+                            }
+                            else{
+                                obstacle[0] = true;
+                            }
                         }
                     }
                 }
-                if(coordinates.getX()-i > -1){
-                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()-i, coordinates.getY()+i))) != null){
-                        if(piece.getPlayer() != player){
-                            return true;
+                if(!obstacle[1]) {
+                    if (coordinates.getX() - i > -1) {
+                        if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() + i))) != null) {
+                            if (piece.getPlayer() != player) {
+                                return true;
+                            }
+                            else{
+                                obstacle[1] = true;
+                            }
                         }
                     }
                 }
             }
             if(coordinates.getY()-i > -1){
-                if(coordinates.getX()+i < 8){
-                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()-i))) != null){
-                        if(piece.getPlayer() != player){
-                            return true;
+                if(!obstacle[2]) {
+                    if (coordinates.getX() + i < 8) {
+                        if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() + i, coordinates.getY() - i))) != null) {
+                            if (piece.getPlayer() != player) {
+                                return true;
+                            } else {
+                                obstacle[2] = true;
+                            }
                         }
                     }
                 }
-                if(coordinates.getX()-i > -1){
-                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()-i, coordinates.getY()-i))) != null){
-                        if(piece.getPlayer() != player){
-                            return true;
+                if(!obstacle[3]) {
+                    if (coordinates.getX() - i > -1) {
+                        if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() - i))) != null) {
+                            if (piece.getPlayer() != player) {
+                                return true;
+                            } else {
+                                obstacle[3] = true;
+                            }
                         }
                     }
                 }
