@@ -22,4 +22,21 @@ public class King extends ChessPiece {
         }
         return false;
     }
+
+    public boolean canCastle(Chessboard board, boolean kingSide){
+
+        int y = location.getY();
+        if(kingSide){
+            if(board.getPiece(new Coordinates(5,y)) == null && board.getPiece(new Coordinates(6,y)) == null){
+                return true;
+            }
+        }
+        else{
+            if(board.getPiece(new Coordinates(3,y)) == null && board.getPiece(new Coordinates(2,y)) == null &&
+            board.getPiece(new Coordinates(1,y)) == null){
+                return true;
+            }
+        }
+        return false;
+    }
 }

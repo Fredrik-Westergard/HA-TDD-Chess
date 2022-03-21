@@ -13,11 +13,21 @@ public abstract class ChessPiece {
 
     protected Coordinates location;
 
+    private boolean moved;
+
     public ChessPiece(PieceType pieceType, final Player player,
                       final Coordinates location) {
         this.pieceType = pieceType;
         this.player = player;
         this.location = location;
+    }
+
+    public boolean HasNotMoved(){
+        return !moved;
+    }
+
+    public void setMoved(boolean moved){
+        this.moved = moved;
     }
 
     public String getSymbol(){
