@@ -53,6 +53,51 @@ public class ChessPieceThreatened {
             }
         }
 
+        for(int y = coordinates.getY()+1; y < 8; y++){
+            ChessPiece piece;
+            if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
+                if(piece.getPlayer() != player){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        for(int y = coordinates.getY()-1; y > -1; y--){
+            ChessPiece piece;
+            if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
+                if(piece.getPlayer() != player){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        for(int x = coordinates.getX()+1; x < 8; x++){
+            ChessPiece piece;
+            if((piece = chessboard.getPiece(new Coordinates(x,coordinates.getY()))) != null){
+                if(piece.getPlayer() != player){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        for(int x = coordinates.getX()-1; x > -1; x--){
+            ChessPiece piece;
+            if((piece = chessboard.getPiece(new Coordinates(x, coordinates.getY()))) != null){
+                if(piece.getPlayer() != player){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 }

@@ -41,59 +41,68 @@ public class ChessPieceThreatenedTest {
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
     }
-    /*
+/*
     @Test
     public void testKingThreatenedByBishop(){
         Game game = new Game();
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         String str = "e2-e4";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         str = "d7-d5";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "f1-b5";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        assertTrue(new ChessPieceThreatened().isThreatened(new Coordinates(4,0), Player.BLACK));
+        assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(), new Coordinates(4,0), Player.BLACK));
     }
-
+*/
     @Test
     public void testKingThreatenedByRook(){
         Game game = new Game();
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         String str = "a2-a4";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         str = "e7-e5";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "a1-a3";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         str = "e5-e4";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "a3-e3";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         str = "b8-a6";
         game.move(str);
+        assertFalse(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "e3-e4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        assertTrue(new ChessPieceThreatened().isThreatened(new Coordinates(4,0), Player.BLACK));
+        assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(), new Coordinates(4,0), Player.BLACK));
     }
-*/
 }
