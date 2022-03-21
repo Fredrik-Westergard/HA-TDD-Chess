@@ -48,39 +48,41 @@ public class Game {
 
         //if king side castling
         if(Objects.equals(move, "O-O")){
-            System.out.println("king side castling");
             Coordinates rooksCoordinates = new Coordinates(7,playerToMove==Player.BLACK?0:7);
             Coordinates kingsCoordinates = new Coordinates(4,playerToMove==Player.BLACK?0:7);
             Rook rook = (Rook)board.getPiece(rooksCoordinates);
             King king = (King)board.getPiece(kingsCoordinates);
-
-            if(rook.HasNotMoved() && king.HasNotMoved()){
-                if(king.canCastle(board,true)){
-                    rook.setLocation(kingsCoordinates);
-                    king.setLocation(rooksCoordinates);
-                    setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
-                    king.setMoved(true);
-                    rook.setMoved(true);
-                    lastMove = true;
+            if(rook != null && king != null){
+                if(rook.HasNotMoved() && king.HasNotMoved()){
+                    if(king.canCastle(board,true)){
+                        rook.setLocation(kingsCoordinates);
+                        king.setLocation(rooksCoordinates);
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
+                        king.setMoved(true);
+                        rook.setMoved(true);
+                        lastMove = true;
+                    }
                 }
             }
+
         }
         //if queen side castling
         else if(Objects.equals(move, "O-O-O")){
-            System.out.println("queen side castling");
             Coordinates rooksCoordinates = new Coordinates(0,playerToMove==Player.BLACK?0:7);
             Coordinates kingsCoordinates = new Coordinates(4,playerToMove==Player.BLACK?0:7);
             Rook rook = (Rook)board.getPiece(rooksCoordinates);
             King king = (King)board.getPiece(kingsCoordinates);
 
-            if(rook.HasNotMoved() && king.HasNotMoved()){
-                if(king.canCastle(board,false)){
-                    rook.setLocation(kingsCoordinates);
-                    king.setLocation(rooksCoordinates);
-                    setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
-                    king.setMoved(true);
-                    rook.setMoved(true);
-                    lastMove = true;
+            if(rook != null && king != null) {
+                if (rook.HasNotMoved() && king.HasNotMoved()) {
+                    if (king.canCastle(board, false)) {
+                        rook.setLocation(kingsCoordinates);
+                        king.setLocation(rooksCoordinates);
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
+                        king.setMoved(true);
+                        rook.setMoved(true);
+                        lastMove = true;
+                    }
                 }
             }
         }

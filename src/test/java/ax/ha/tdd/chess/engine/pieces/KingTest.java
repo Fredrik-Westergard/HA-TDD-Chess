@@ -143,4 +143,86 @@ public class KingTest {
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
+
+    @Test
+    public void testInvalidCastling(){
+        Game game = new Game();
+        game.move("g2-g4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("d7-d5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("f1-h3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("b8-a6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("g1-f3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("d8-d6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("h1-g1");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("c8-e6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("a2-a3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("a8-b8");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("a3-a4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("O-O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+
+        game = new Game();
+        game.move("g2-g4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("d7-d5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("g1-f3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("d8-d6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("f1-h3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("c8-e6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("a2-a4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("O-O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("b8-a6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        game.move("O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("O-O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+    }
 }
