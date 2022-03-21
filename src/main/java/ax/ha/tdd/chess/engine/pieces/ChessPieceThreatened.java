@@ -98,6 +98,42 @@ public class ChessPieceThreatened {
             }
         }
 
+        for(int i = 1; i < 7; i++){
+            ChessPiece piece;
+            if(coordinates.getY()+i < 8){
+                if(coordinates.getX()+i < 8){
+                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()+i))) != null){
+                        if(piece.getPlayer() != player){
+                            return true;
+                        }
+                    }
+                }
+                if(coordinates.getX()-i > -1){
+                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()-i, coordinates.getY()+i))) != null){
+                        if(piece.getPlayer() != player){
+                            return true;
+                        }
+                    }
+                }
+            }
+            if(coordinates.getY()-i > -1){
+                if(coordinates.getX()+i < 8){
+                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()-i))) != null){
+                        if(piece.getPlayer() != player){
+                            return true;
+                        }
+                    }
+                }
+                if(coordinates.getX()-i > -1){
+                    if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()-i, coordinates.getY()-i))) != null){
+                        if(piece.getPlayer() != player){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
         return false;
     }
 }

@@ -41,7 +41,7 @@ public class ChessPieceThreatenedTest {
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(4,0), Player.BLACK));
     }
-/*
+
     @Test
     public void testKingThreatenedByBishop(){
         Game game = new Game();
@@ -63,7 +63,7 @@ public class ChessPieceThreatenedTest {
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(), new Coordinates(4,0), Player.BLACK));
     }
-*/
+
     @Test
     public void testKingThreatenedByRook(){
         Game game = new Game();
