@@ -20,7 +20,14 @@ public class Queen extends ChessPiece{
             }
         }
         else{
-            System.out.println("Queen wants to eat a piece");
+            if(chessboard.getPiece(destination).getPlayer() != player){
+                if(Math.abs(location.getY()- destination.getY()) == Math.abs(location.getX()-destination.getX())){
+                    return new ChessPieceCommon(location).isClearDiagonal(chessboard, destination);
+                }
+                else{
+                    return new ChessPieceCommon(location).isClearHorizontal(chessboard, destination);
+                }
+            }
         }
 
         return false;

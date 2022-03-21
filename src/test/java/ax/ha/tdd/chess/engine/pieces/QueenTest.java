@@ -11,30 +11,30 @@ public class QueenTest {
     public void testQueenMoveValid(){
         Game game = new Game();
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        String str = "f2-f4";
+        String str = "e2-e4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "e7-e5";
+        str = "d7-d5";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e1-h4";
+        str = "d1-g4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
 
         game = new Game();
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e2-e4";
+        str = "d2-d4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "e7-e5";
+        str = "d7-d5";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e1-e3";
+        str = "d1-d3";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
@@ -44,22 +44,63 @@ public class QueenTest {
     public void testQueenMoveInvalid(){
         Game game = new Game();
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        String str = "f2-f4";
+        String str = "e2-e4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "e7-e5";
+        str = "d7-d5";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e1-e4";
+        str = "d1-d4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
 
         game = new Game();
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e2-e4";
+        str = "d2-d4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "d7-d5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d1-e3";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+    }
+
+    @Test
+    public void testQueenEatQueen(){
+        Game game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "e2-e4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "d7-d5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d1-g4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "d8-d7";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "g4-d7";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+
+        game = new Game();
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d2-d4";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
@@ -67,9 +108,21 @@ public class QueenTest {
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "e1-f3";
+        str = "d4-e5";
         game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "a7-a5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d1-d7";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "d8-d7";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
 }
