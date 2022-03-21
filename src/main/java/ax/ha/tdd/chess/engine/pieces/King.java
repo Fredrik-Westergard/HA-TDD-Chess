@@ -17,12 +17,9 @@ public class King extends ChessPiece {
                 return true;
             }
             else{
-                System.out.println("king wants to eat a piece");
+                return chessboard.getPiece(destination).getPlayer() != player;
             }
         }
-
-
-
         return false;
     }
 }
