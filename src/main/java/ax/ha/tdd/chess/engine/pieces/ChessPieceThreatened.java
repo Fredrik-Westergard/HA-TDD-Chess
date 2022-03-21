@@ -64,7 +64,8 @@ public class ChessPieceThreatened {
         for(int y = coordinates.getY()+1; y < 8; y++){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
-                if(piece.getPlayer() != player){
+                if(piece.getPlayer() != player && ((piece.getPieceType() == PieceType.KING && y == coordinates.getY()+1) ||
+                        (piece.getPieceType() == PieceType.QUEEN || piece.getPieceType() == PieceType.ROOK))){
                     return true;
                 }
                 else{
@@ -75,7 +76,8 @@ public class ChessPieceThreatened {
         for(int y = coordinates.getY()-1; y > -1; y--){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
-                if(piece.getPlayer() != player){
+                if(piece.getPlayer() != player && ((piece.getPieceType() == PieceType.KING && y == coordinates.getY()-1) ||
+                        (piece.getPieceType() == PieceType.QUEEN || piece.getPieceType() == PieceType.ROOK))){
                     return true;
                 }
                 else{
@@ -86,7 +88,8 @@ public class ChessPieceThreatened {
         for(int x = coordinates.getX()+1; x < 8; x++){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(x,coordinates.getY()))) != null){
-                if(piece.getPlayer() != player){
+                if(piece.getPlayer() != player&& ((piece.getPieceType() == PieceType.KING && x == coordinates.getX()+1) ||
+                        (piece.getPieceType() == PieceType.QUEEN || piece.getPieceType() == PieceType.ROOK))){
                     return true;
                 }
                 else{
@@ -97,7 +100,8 @@ public class ChessPieceThreatened {
         for(int x = coordinates.getX()-1; x > -1; x--){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(x, coordinates.getY()))) != null){
-                if(piece.getPlayer() != player){
+                if(piece.getPlayer() != player&& ((piece.getPieceType() == PieceType.KING && x == coordinates.getX()-1) ||
+                        (piece.getPieceType() == PieceType.QUEEN || piece.getPieceType() == PieceType.ROOK))){
                     return true;
                 }
                 else{
@@ -118,7 +122,8 @@ public class ChessPieceThreatened {
                 if(!obstacle[0]){
                     if(coordinates.getX()+i < 8){
                         if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()+i))) != null){
-                            if(piece.getPlayer() != player){
+                            if(piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))){
                                 return true;
                             }
                             else{
@@ -130,7 +135,8 @@ public class ChessPieceThreatened {
                 if(!obstacle[1]) {
                     if (coordinates.getX() - i > -1) {
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() + i))) != null) {
-                            if (piece.getPlayer() != player) {
+                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             }
                             else{
@@ -144,7 +150,8 @@ public class ChessPieceThreatened {
                 if(!obstacle[2]) {
                     if (coordinates.getX() + i < 8) {
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() + i, coordinates.getY() - i))) != null) {
-                            if (piece.getPlayer() != player) {
+                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             } else {
                                 obstacle[2] = true;
@@ -155,7 +162,8 @@ public class ChessPieceThreatened {
                 if(!obstacle[3]) {
                     if (coordinates.getX() - i > -1) {
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() - i))) != null) {
-                            if (piece.getPlayer() != player) {
+                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             } else {
                                 obstacle[3] = true;
