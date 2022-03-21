@@ -30,7 +30,6 @@ public class Game {
     }
 
     public String getLastMoveResult() {
-        //TODO this should be used to show the player what happened
         //Illegal move, correct move, e2 moved to e4 etc.
         if (isNewGame) {
             return "Game hasn't begun";
@@ -44,7 +43,6 @@ public class Game {
     }
 
     public void move(String move) {
-        //TODO this should trigger your move logic.
         //set last move to false to indicate that there is a new move happening
         lastMove = false;
         //change move to uppercase

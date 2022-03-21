@@ -1,6 +1,7 @@
 package ax.ha.tdd.chess.engine;
 
 import ax.ha.tdd.chess.engine.pieces.ChessPieceStub;
+import ax.ha.tdd.chess.engine.pieces.King;
 import ax.ha.tdd.chess.engine.pieces.PieceType;
 import ax.ha.tdd.chess.engine.pieces.Queen;
 import org.junit.jupiter.api.Assertions;
@@ -77,8 +78,8 @@ public class ChessboardTest {
     @Test
     public void fullboard_Kings_isInCorrectSpot() {
         final Chessboard chessboard = Chessboard.startingBoard();
-        Assertions.assertEquals(new ChessPieceStub(PieceType.KING, Player.BLACK), chessboard.getPiece(new Coordinates(4, 0)));
-        Assertions.assertEquals(new ChessPieceStub(PieceType.KING, Player.WHITE), chessboard.getPiece(new Coordinates(4, 7)));
+        Assertions.assertEquals(new King(PieceType.KING, Player.BLACK, null), chessboard.getPiece(new Coordinates(4, 0)));
+        Assertions.assertEquals(new King(PieceType.KING, Player.WHITE, null), chessboard.getPiece(new Coordinates(4, 7)));
     }
 
     @Test
