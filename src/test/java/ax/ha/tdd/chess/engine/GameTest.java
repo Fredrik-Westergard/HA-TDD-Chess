@@ -87,4 +87,28 @@ public class GameTest {
         assertTrue(game.isCheck(Player.WHITE));
     }
 
+    @Test
+    public void testIsCheckStateActiveThenInactive(){
+        Game game = new Game();
+        game.move("b1-c3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        game.move("b8-c6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        game.move("c3-d5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        game.move("c6-d4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        game.move("d5-f6");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertTrue(game.isCheck(Player.BLACK));
+        game.move("d4-f3");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertTrue(game.isCheck(Player.WHITE));
+        game.move("f6-d5");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertFalse(game.isCheck(Player.BLACK));
+        game.move("f3-d4");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertFalse(game.isCheck(Player.WHITE));
+    }
 }

@@ -154,6 +154,12 @@ public class Game {
         System.out.println(chessboardWriter.print(board));
         System.out.println("   | " + playerToMove.name().toLowerCase() + " tried to perform move: " + move + (move.equals("O-O")?"       |":"     |"));
         System.out.println("   | and it was: " + (lastMove?"successful                 |":"unsuccessful               |"));
+        if(isCheck(Player.WHITE)){
+            System.out.println("   | white is in check position             |");
+        }
+        if(isCheck(Player.BLACK)){
+            System.out.println("   | black is in check position             |");
+        }
         System.out.println("   +----------------------------------------+");
         System.out.println();
     }

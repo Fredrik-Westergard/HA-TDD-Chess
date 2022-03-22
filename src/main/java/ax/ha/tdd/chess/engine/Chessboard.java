@@ -30,7 +30,7 @@ public class Chessboard implements Iterable<ChessPiece[]> {
         }
     }
 
-    private Coordinates[] king = {new Coordinates(4,0), new Coordinates(4,7)};
+    private Coordinates[] king = {new Coordinates(4,7), new Coordinates(4,0)};
 
     public static Chessboard startingBoard() {
         final Chessboard chessboard = new Chessboard();
