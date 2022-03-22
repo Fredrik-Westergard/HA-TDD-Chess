@@ -26,24 +26,25 @@ public class King extends ChessPiece {
     public boolean canCastle(Chessboard board, boolean kingSide){
         int y = location.getY();
         ChessPieceThreatened chessPieceThreatened = new ChessPieceThreatened();
-        Player player = board.getPiece(new Coordinates(4,y)).getPlayer() == Player.WHITE?Player.BLACK:Player.WHITE;
+        Player player = board.getPiece(new Coordinates(4,y)).getPlayer();
 
         if(kingSide){
             if(board.getPiece(new Coordinates(5,y)) == null && board.getPiece(new Coordinates(6,y)) == null){
-                return chessPieceThreatened.isThreatened(board, new Coordinates(4, y), player) ||
+                System.out.println(chessPieceThreatened.isThreatened(board, new Coordinates(7, y), player));
+                return !(chessPieceThreatened.isThreatened(board, new Coordinates(4, y), player) ||
                         chessPieceThreatened.isThreatened(board, new Coordinates(5, y), player) ||
                         chessPieceThreatened.isThreatened(board, new Coordinates(6, y), player) ||
-                        chessPieceThreatened.isThreatened(board, new Coordinates(7, y), player);
+                        chessPieceThreatened.isThreatened(board, new Coordinates(7, y), player));
             }
         }
         else{
             if(board.getPiece(new Coordinates(3,y)) == null && board.getPiece(new Coordinates(2,y)) == null &&
             board.getPiece(new Coordinates(1,y)) == null){
-                return chessPieceThreatened.isThreatened(board, new Coordinates(4, y), player) ||
+                return !(chessPieceThreatened.isThreatened(board, new Coordinates(4, y), player) ||
                         chessPieceThreatened.isThreatened(board, new Coordinates(3, y), player) ||
                         chessPieceThreatened.isThreatened(board, new Coordinates(2, y), player) ||
                         chessPieceThreatened.isThreatened(board, new Coordinates(1, y), player) ||
-                        chessPieceThreatened.isThreatened(board, new Coordinates(0, y), player);
+                        chessPieceThreatened.isThreatened(board, new Coordinates(0, y), player));
             }
         }
         return false;
