@@ -10,6 +10,9 @@ public class Game {
     private Chessboard board = Chessboard.startingBoard();
     //boolean used to check if last move was successful
     private boolean lastMove = false;
+    //boolean used to check if it's a check state
+    private boolean checkBlack = false;
+    private boolean checkWhite = false;
     //indicator for which players move it is
     private Player playerToMove = Player.WHITE;
 
@@ -28,6 +31,19 @@ public class Game {
 
     public Chessboard getBoard() {
         return board;
+    }
+
+    public boolean isCheck(Player player) {
+        return player == Player.WHITE?checkWhite:checkBlack;
+    }
+
+    public void setCheck(boolean check, Player player) {
+        if(player == Player.WHITE){
+            this.checkWhite = check;
+        }
+        else{
+            this.checkBlack = check;
+        }
     }
 
     public String getLastMoveResult() {

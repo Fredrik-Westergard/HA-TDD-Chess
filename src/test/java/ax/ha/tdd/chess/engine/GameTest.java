@@ -2,7 +2,7 @@ package ax.ha.tdd.chess.engine;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
@@ -55,5 +55,16 @@ public class GameTest {
         str = "AA-AA";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+    }
+
+    @Test
+    public void testChangeGameStateFromNotCheckToCheck(){
+        final Game game = new Game();
+        assertFalse(game.isCheck(Player.BLACK));
+        game.setCheck(true, Player.BLACK);
+        assertTrue(game.isCheck(Player.BLACK));
+        assertFalse(game.isCheck(Player.WHITE));
+        game.setCheck(true, Player.WHITE);
+        assertTrue(game.isCheck(Player.WHITE));
     }
 }
