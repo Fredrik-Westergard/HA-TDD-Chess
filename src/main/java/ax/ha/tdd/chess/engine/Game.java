@@ -46,6 +46,19 @@ public class Game {
         }
     }
 
+    public String getCheckResult(){
+        if(isCheck(Player.WHITE) && isCheck(Player.BLACK)){
+            return "White and black are in check positions";
+        }
+        if(isCheck(Player.WHITE)){
+            return "White is in check position";
+        }
+        else if(isCheck(Player.BLACK)){
+            return "Black is in check position";
+        }
+        return "";
+    }
+
     public String getLastMoveResult() {
         //Illegal move, correct move, e2 moved to e4 etc.
         if (isNewGame) {
@@ -60,7 +73,7 @@ public class Game {
     }
 
     public void move(String move) {
-        //set last move to false to indicate that there is a new move happening
+        //set last move to false, to indicate that there is a new move happening
         lastMove = false;
         //change move to uppercase
         move = move.toUpperCase();

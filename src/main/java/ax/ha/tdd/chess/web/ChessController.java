@@ -18,6 +18,7 @@ public class ChessController {
         }
         model.addAttribute("player", new PlayerView(game.getPlayerToMove()));
         model.addAttribute("lastMoveResult", game.getLastMoveResult());
+        model.addAttribute("check", game.getCheckResult());
         model.addAttribute("chessboard",
                 new ChessboardView(game.getBoard()));
         return "chess";
