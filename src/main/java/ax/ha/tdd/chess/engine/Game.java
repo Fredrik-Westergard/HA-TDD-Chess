@@ -64,6 +64,7 @@ public class Game {
         lastMove = false;
         //change move to uppercase
         move = move.toUpperCase();
+        ChessPieceThreatened chessPieceThreatened = new ChessPieceThreatened();
 
         //if king side castling
         if(Objects.equals(move, "O-O")){
@@ -78,11 +79,12 @@ public class Game {
                         board.removePiece(king);
                         rook.setLocation(kingsCoordinates);
                         king.setLocation(rooksCoordinates);
-                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         king.setMoved(true);
                         rook.setMoved(true);
                         board.addPiece(rook);
                         board.addPiece(king);
+                        board.setKing(rooksCoordinates, getPlayerToMove());
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         lastMove = true;
                     }
                 }
@@ -103,11 +105,12 @@ public class Game {
                         board.removePiece(king);
                         rook.setLocation(kingsCoordinates);
                         king.setLocation(rooksCoordinates);
-                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         king.setMoved(true);
                         rook.setMoved(true);
                         board.addPiece(rook);
                         board.addPiece(king);
+                        board.setKing(rooksCoordinates,getPlayerToMove());
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         lastMove = true;
                     }
                 }
@@ -134,14 +137,20 @@ public class Game {
                         board.removePiece(piece);
                         piece.setLocation(end);
                         board.addPiece(piece);
-                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                         piece.setMoved(true);
                         lastMove = true;
+                        if(piece.getPieceType() == PieceType.KING){
+                            board.setKing(end,getPlayerToMove());
+                        }
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
                     }
                 }
+
             }
         }
         isNewGame = false;
+        setCheck(chessPieceThreatened.isThreatened(board, board.getKing(Player.WHITE), Player.WHITE), Player.WHITE);
+        setCheck(chessPieceThreatened.isThreatened(board, board.getKing(Player.BLACK), Player.BLACK), Player.BLACK);
         System.out.println(chessboardWriter.print(board));
         System.out.println("   | " + playerToMove.name().toLowerCase() + " tried to perform move: " + move + (move.equals("O-O")?"       |":"     |"));
         System.out.println("   | and it was: " + (lastMove?"successful                 |":"unsuccessful               |"));

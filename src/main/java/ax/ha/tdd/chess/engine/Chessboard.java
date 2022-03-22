@@ -12,6 +12,26 @@ public class Chessboard implements Iterable<ChessPiece[]> {
     // [y][x]
     private final ChessPiece[][] board = new ChessPiece[8][8];
 
+    public Coordinates getKing(Player player) {
+        if(player == Player.WHITE){
+            return king[0];
+        }
+        else{
+            return king[1];
+        }
+    }
+
+    public void setKing(Coordinates coordinates, Player player) {
+        if(player == Player.WHITE){
+            this.king[0] = coordinates;
+        }
+        else{
+            this.king[1] = coordinates;
+        }
+    }
+
+    private Coordinates[] king = {new Coordinates(4,0), new Coordinates(4,7)};
+
     public static Chessboard startingBoard() {
         final Chessboard chessboard = new Chessboard();
 
