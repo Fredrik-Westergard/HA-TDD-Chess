@@ -41,7 +41,6 @@ public class ChessPieceThreatened {
                         ChessPiece piece;
                         if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()-2))) != null){
                             if(piece.getPlayer() != player && piece.getPieceType() == PieceType.KNIGHT){
-                                System.out.println("i: " + i);
                                 return true;
                             }
                         }
