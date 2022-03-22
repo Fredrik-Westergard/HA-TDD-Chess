@@ -6,13 +6,13 @@ import ax.ha.tdd.chess.engine.Player;
 
 public class ChessPieceThreatened {
 
-    public boolean isThreatened(Chessboard chessboard, Coordinates coordinates, Player player) {
+    public static boolean isThreatened(Chessboard chessboard, Coordinates coordinates, Player player) {
         return isThreatenedByKnight(chessboard, coordinates, player) ||
                 isThreatenedDiagonally(chessboard, coordinates, player) ||
                 isThreatenedHorizontally(chessboard, coordinates, player);
     }
 
-    private boolean isThreatenedByKnight(Chessboard chessboard, Coordinates coordinates, Player player){
+    private static boolean isThreatenedByKnight(Chessboard chessboard, Coordinates coordinates, Player player){
         for(int i = -2; i < 3; i++){
             if(i != 0){
                 if(i == 2 || i == -2){
@@ -60,7 +60,7 @@ public class ChessPieceThreatened {
         return false;
     }
 
-    private boolean isThreatenedHorizontally(Chessboard chessboard, Coordinates coordinates, Player player){
+    private static boolean isThreatenedHorizontally(Chessboard chessboard, Coordinates coordinates, Player player){
         for(int y = coordinates.getY()+1; y < 8; y++){
             ChessPiece piece;
             if((piece = chessboard.getPiece(new Coordinates(coordinates.getX(),y))) != null){
@@ -112,7 +112,7 @@ public class ChessPieceThreatened {
         return false;
     }
 
-    private boolean isThreatenedDiagonally(Chessboard chessboard, Coordinates coordinates, Player player){
+    private static boolean isThreatenedDiagonally(Chessboard chessboard, Coordinates coordinates, Player player){
 
         boolean[] obstacle = {false,false,false,false};
 

@@ -10,9 +10,6 @@ public class Game {
     private Chessboard board = Chessboard.startingBoard();
     //boolean used to check if last move was successful
     private boolean lastMove = false;
-    //boolean used to check if it's a check state
-    private boolean checkBlack = false;
-    private boolean checkWhite = false;
     //indicator for which players move it is
     private Player playerToMove = Player.WHITE;
 
@@ -33,27 +30,15 @@ public class Game {
         return board;
     }
 
-    public boolean isCheck(Player player) {
-        return player == Player.WHITE?checkWhite:checkBlack;
-    }
-
-    public void setCheck(boolean check, Player player) {
-        if(player == Player.WHITE){
-            this.checkWhite = check;
-        }
-        else{
-            this.checkBlack = check;
-        }
-    }
-
     public String getCheckResult(){
-        if(isCheck(Player.WHITE) && isCheck(Player.BLACK)){
+        if(WinningStateChecker.checkState(board, Player.WHITE) == WinningState.CHECK &&
+                WinningStateChecker.checkState(board,Player.BLACK) == WinningState.CHECK){
             return "White and black are in check positions";
         }
-        if(isCheck(Player.WHITE)){
+        if(WinningStateChecker.checkState(board, Player.WHITE) == WinningState.CHECK){
             return "White is in check position";
         }
-        else if(isCheck(Player.BLACK)){
+        else if(WinningStateChecker.checkState(board, Player.BLACK) == WinningState.CHECK){
             return "Black is in check position";
         }
         return "";
@@ -77,7 +62,7 @@ public class Game {
         lastMove = false;
         //change move to uppercase
         move = move.toUpperCase();
-        ChessPieceThreatened chessPieceThreatened = new ChessPieceThreatened();
+
 
         //if king side castling
         if(Objects.equals(move, "O-O")){
@@ -162,15 +147,13 @@ public class Game {
             }
         }
         isNewGame = false;
-        setCheck(chessPieceThreatened.isThreatened(board, board.getKing(Player.WHITE), Player.WHITE), Player.WHITE);
-        setCheck(chessPieceThreatened.isThreatened(board, board.getKing(Player.BLACK), Player.BLACK), Player.BLACK);
         System.out.println(chessboardWriter.print(board));
         System.out.println("   | " + playerToMove.name().toLowerCase() + " tried to perform move: " + move + (move.equals("O-O")?"       |":"     |"));
         System.out.println("   | and it was: " + (lastMove?"successful                 |":"unsuccessful               |"));
-        if(isCheck(Player.WHITE)){
+        if(WinningStateChecker.checkState(board, Player.WHITE) == WinningState.CHECK){
             System.out.println("   | white is in check position             |");
         }
-        if(isCheck(Player.BLACK)){
+        if(WinningStateChecker.checkState(board, Player.BLACK) == WinningState.CHECK){
             System.out.println("   | black is in check position             |");
         }
         System.out.println("   +----------------------------------------+");
