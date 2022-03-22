@@ -1,5 +1,6 @@
 package ax.ha.tdd.chess.engine.pieces;
 
+import ax.ha.tdd.chess.engine.Coordinates;
 import ax.ha.tdd.chess.engine.Game;
 import ax.ha.tdd.chess.engine.Player;
 import org.junit.jupiter.api.Test;
@@ -76,6 +77,7 @@ public class QueenTest {
     @Test
     public void testQueenEatQueen(){
         Game game = new Game();
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,1)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         String str = "e2-e4";
         game.move(str);
@@ -99,6 +101,7 @@ public class QueenTest {
         assertEquals(game.getPlayerToMove(), Player.BLACK);
 
         game = new Game();
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,0)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "d2-d4";
         game.move(str);
