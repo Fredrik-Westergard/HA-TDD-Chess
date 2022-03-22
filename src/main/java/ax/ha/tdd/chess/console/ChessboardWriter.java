@@ -23,7 +23,7 @@ public class ChessboardWriter {
                         if(y == 1){
                             stringBuilder.append("\n");
                         }
-                        stringBuilder.append(y);
+                        stringBuilder.append(9-y);
                         stringBuilder.append("  | ");
                     }
                 }
