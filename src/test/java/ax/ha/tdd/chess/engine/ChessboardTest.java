@@ -78,14 +78,14 @@ public class ChessboardTest {
     @Test
     public void fullboard_Kings_isInCorrectSpot() {
         final Chessboard chessboard = Chessboard.startingBoard();
-        Assertions.assertEquals(new King(PieceType.KING, Player.BLACK, null), chessboard.getPiece(new Coordinates(4, 0)));
-        Assertions.assertEquals(new King(PieceType.KING, Player.WHITE, null), chessboard.getPiece(new Coordinates(4, 7)));
+        Assertions.assertEquals(new King(Player.BLACK, null), chessboard.getPiece(new Coordinates(4, 0)));
+        Assertions.assertEquals(new King(Player.WHITE, null), chessboard.getPiece(new Coordinates(4, 7)));
     }
 
     @Test
     public void fullboard_Queens_isInCorrectSpot() {
         final Chessboard chessboard = Chessboard.startingBoard();
-        Assertions.assertEquals(new Queen(PieceType.QUEEN, Player.BLACK, null), chessboard.getPiece(new Coordinates(3, 0)));
-        Assertions.assertEquals(new Queen(PieceType.QUEEN, Player.WHITE, null), chessboard.getPiece(new Coordinates(3, 7)));
+        Assertions.assertEquals(new Queen(Player.BLACK, null), chessboard.getPiece(new Coordinates(3, 0)));
+        Assertions.assertEquals(new Queen(Player.WHITE, null), chessboard.getPiece(new Coordinates(3, 7)));
     }
 }

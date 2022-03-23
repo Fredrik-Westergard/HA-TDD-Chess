@@ -11,8 +11,15 @@ public class Chessboard implements Iterable<ChessPiece[]> {
     // Feel free to change this however you like
     // [y][x]
     private final ChessPiece[][] board = new ChessPiece[8][8];
+    //the kings
+    private King[] king = new King[2];
 
-    public Coordinates getKing(Player player) {
+    /**
+     * getter for king
+     * @param player the color of king you want
+     * @return the King object
+     */
+    public King getKing(Player player) {
         if(player == Player.WHITE){
             return king[0];
         }
@@ -21,83 +28,85 @@ public class Chessboard implements Iterable<ChessPiece[]> {
         }
     }
 
+    /**
+     * setter of king object
+     * @param coordinates the coordinates of the king
+     * @param player the color of the king
+     */
     public void setKing(Coordinates coordinates, Player player) {
-        if(player == Player.WHITE){
-            this.king[0] = coordinates;
-        }
-        else{
-            this.king[1] = coordinates;
-        }
+        king[player == Player.WHITE?0:1] = (King)this.getPiece(coordinates);
     }
 
-    private Coordinates[] king = {new Coordinates(4,7), new Coordinates(4,0)};
-
+    /**
+     * Method to get starting chessboard
+     * @return the starting chessboard
+     */
     public static Chessboard startingBoard() {
         final Chessboard chessboard = new Chessboard();
 
-        chessboard.withMirroredPiece(PieceType.PAWN, List.of(0,1,2,3,4,5,6,7), 1)
-                .withMirroredPiece(PieceType.ROOK, List.of(0,7), 0)
-                .withMirroredPiece(PieceType.KNIGHT, List.of(1,6), 0)
-                .withMirroredPiece(PieceType.BISHOP, List.of(2,5), 0)
-                .withMirroredPiece(PieceType.QUEEN, List.of(3), 0)
-                .withMirroredPiece(PieceType.KING, List.of(4), 0);
+        chessboard.addAllPieces();
         return chessboard;
     }
 
+    /**
+     * getter for a specific piece
+     * @param coordinates the coordinates for that piece
+     * @return the piece or null
+     */
     public ChessPiece getPiece(final Coordinates coordinates) {
         return board[coordinates.getY()][coordinates.getX()];
     }
 
+    /**
+     * method to add piece to the board
+     * @param chessPiece the chess piece to add
+     */
     public void addPiece(final ChessPiece chessPiece) {
         board[chessPiece.getLocation().getY()][chessPiece.getLocation().getX()] = chessPiece;
     }
 
+    /**
+     * method to remove chesspiece
+     * @param chessPiece the chess piece to remove
+     */
     public void removePiece(final ChessPiece chessPiece){
         board[chessPiece.getLocation().getY()][chessPiece.getLocation().getX()] = null;
     }
 
     /**
-     * Helper method to initialize chessboard with {@link ChessPieceStub}.
-     * Basically mirrors all added pieces for both players.
-     * When all pieces has been implemented, this should be replaced with the proper implementations.
-     *
-     * @param pieceType pieceType
-     * @param xCoordinates xCoordinates
-     * @param yCoordinate yCoordinateOffset
-     * @return itself, like a builder pattern
+     * Method to add all pieces in correct positions
      */
-    private Chessboard withMirroredPiece(final PieceType pieceType,
-                                         final List<Integer> xCoordinates, final int yCoordinate) {
-        xCoordinates.forEach(xCoordinate -> {
-
-            if(yCoordinate == 1){
-                addPiece(new Pawn(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new Pawn(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+    private void addAllPieces() {
+        for(int yCoordinate = 0; yCoordinate < 2; yCoordinate++){
+            for(int xCoordinate = 0; xCoordinate < 8; xCoordinate++){
+                if(yCoordinate == 1){
+                    addPiece(new Pawn(Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
+                    addPiece(new Pawn(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+                }
+                else if((xCoordinate == 0 || xCoordinate == 7)){
+                    addPiece(new Rook(Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
+                    addPiece(new Rook(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+                }
+                else if((xCoordinate == 1 || xCoordinate == 6)){
+                    addPiece(new Knight(Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
+                    addPiece(new Knight(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+                }
+                else if((xCoordinate == 2 || xCoordinate == 5)){
+                    addPiece(new Bishop(Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
+                    addPiece(new Bishop(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+                }
+                else if(xCoordinate == 3){
+                    addPiece(new Queen(Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
+                    addPiece(new Queen(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
+                }
+                else{
+                    king[0] = new King(Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate));
+                    king[1] = new King(Player.BLACK, new Coordinates(xCoordinate, yCoordinate));
+                    addPiece(king[0]);
+                    addPiece(king[1]);
+                }
             }
-            else if((xCoordinate == 0 || xCoordinate == 7) && (yCoordinate == 0 || yCoordinate == 7)){
-                addPiece(new Rook(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new Rook(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
-            }
-            else if((xCoordinate == 1 || xCoordinate == 6) && (yCoordinate == 0 || yCoordinate == 7)){
-                addPiece(new Knight(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new Knight(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
-            }
-            else if((xCoordinate == 2 || xCoordinate == 5) && (yCoordinate == 0 || yCoordinate == 7)){
-                addPiece(new Bishop(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new Bishop(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
-            }
-            else if(xCoordinate == 3 && (yCoordinate == 0 || yCoordinate == 7)){
-                addPiece(new Queen(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new Queen(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
-            }
-            else{
-                addPiece(new King(pieceType, Player.BLACK, new Coordinates(xCoordinate, yCoordinate)));
-                addPiece(new King(pieceType, Player.WHITE, new Coordinates(xCoordinate, 7 - yCoordinate)));
-            }
-
-
-        });
-        return this;
+        }
     }
 
     @Override

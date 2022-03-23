@@ -1,12 +1,11 @@
 package ax.ha.tdd.chess.engine;
 
 public enum WinningState {
-    NOTSTARTED(0),
-    PLAYING(1),
-    CHECK(2),
-    CHECKMATE(4);
+    PLAYING(0),
+    CHECK(1),
+    CHECKMATE(3);
 
-    private int number;
+    private final int number;
 
     WinningState(int number){
         this.number = number;

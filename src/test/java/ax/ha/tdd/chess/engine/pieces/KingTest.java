@@ -70,8 +70,9 @@ public class KingTest {
     }
 
     @Test
-    public void testKingEatPawn(){
+    public void testKingEatPawnAndKnight(){
         Game game = new Game();
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(2,0)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         String str = "e2-e4";
         game.move(str);
@@ -93,7 +94,7 @@ public class KingTest {
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "f7-f5";
+        str = "g8-h6";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
@@ -101,7 +102,7 @@ public class KingTest {
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "a7-a5";
+        str = "h6-f5";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
@@ -252,6 +253,6 @@ public class KingTest {
         game.move("O-O");
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        assertTrue(new ChessPieceThreatened().isThreatened(game.getBoard(),new Coordinates(7,0), Player.WHITE));
+        assertTrue(ChessPieceThreatened.isThreatened(game.getBoard(),new Coordinates(7,0), Player.WHITE));
     }
 }

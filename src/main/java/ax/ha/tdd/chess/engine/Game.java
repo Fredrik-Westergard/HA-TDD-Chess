@@ -12,24 +12,39 @@ public class Game {
     private boolean lastMove = false;
     //indicator for which players move it is
     private Player playerToMove = Player.WHITE;
-
+    //the chessboard writer for printing out game to terminal
     private final ChessboardWriter chessboardWriter = new ChessboardWriter();
-
-    //Feel free to delete this stuff. Just for initial testing.
+    //new game flag
     boolean isNewGame = true;
 
+    /**
+     * getter for player to move
+     * @return the player to move
+     */
     public Player getPlayerToMove() {
         return playerToMove;
     }
 
+    /**
+     * setter for the player to move
+     * @param p the player to move
+     */
     private void setPlayerToMove(Player p){
         this.playerToMove = p;
     }
 
+    /**
+     * getter for the chessboard
+     * @return the chessboard
+     */
     public Chessboard getBoard() {
         return board;
     }
 
+    /**
+     * checker for the current game results
+     * @return the game results
+     */
     public String getCheckResult(){
 
         if(WinningStateChecker.checkState(board,Player.BLACK) == WinningState.CHECKMATE ||
@@ -49,6 +64,10 @@ public class Game {
         return "";
     }
 
+    /**
+     * getter for last move results
+     * @return the last move results
+     */
     public String getLastMoveResult() {
         //Illegal move, correct move, e2 moved to e4 etc.
         if (isNewGame) {
@@ -62,7 +81,12 @@ public class Game {
         }
     }
 
+    /**
+     * method to move a piece
+     * @param move the movement the player wants to make, in string format ( example "a1-a2" )
+     */
     public void move(String move) {
+        //if the game is over, don't move
         if (WinningStateChecker.checkState(board, Player.WHITE) != WinningState.CHECKMATE &&
                 WinningStateChecker.checkState(board, Player.BLACK) != WinningState.CHECKMATE) {
             //set last move to false, to indicate that there is a new move happening
@@ -77,24 +101,22 @@ public class Game {
                 Coordinates kingsCoordinates = new Coordinates(4, playerToMove == Player.BLACK ? 0 : 7);
                 Rook rook = (Rook) board.getPiece(rooksCoordinates);
                 King king = (King) board.getPiece(kingsCoordinates);
-                if (rook != null && king != null) {
-                    if (rook.HasNotMoved() && king.HasNotMoved()) {
-                        if (king.canCastle(board, true)) {
-                            board.removePiece(rook);
-                            board.removePiece(king);
-                            rook.setLocation(kingsCoordinates);
-                            king.setLocation(rooksCoordinates);
-                            king.setMoved(true);
-                            rook.setMoved(true);
-                            board.addPiece(rook);
-                            board.addPiece(king);
-                            board.setKing(rooksCoordinates, getPlayerToMove());
-                            setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
-                            lastMove = true;
-                        }
+
+                if (king != null){
+                    if(king.canCastle(board, true)) {
+                        board.removePiece(rook);
+                        board.removePiece(king);
+                        rook.setLocation(kingsCoordinates);
+                        king.setLocation(rooksCoordinates);
+                        king.setMoved(true);
+                        rook.setMoved(true);
+                        board.addPiece(rook);
+                        board.addPiece(king);
+                        board.setKing(rooksCoordinates, getPlayerToMove());
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
+                        lastMove = true;
                     }
                 }
-
             }
             //if queen side castling
             else if (Objects.equals(move, "O-O-O")) {
@@ -103,21 +125,19 @@ public class Game {
                 Rook rook = (Rook) board.getPiece(rooksCoordinates);
                 King king = (King) board.getPiece(kingsCoordinates);
 
-                if (rook != null && king != null) {
-                    if (rook.HasNotMoved() && king.HasNotMoved()) {
-                        if (king.canCastle(board, false)) {
-                            board.removePiece(rook);
-                            board.removePiece(king);
-                            rook.setLocation(kingsCoordinates);
-                            king.setLocation(rooksCoordinates);
-                            king.setMoved(true);
-                            rook.setMoved(true);
-                            board.addPiece(rook);
-                            board.addPiece(king);
-                            board.setKing(rooksCoordinates, getPlayerToMove());
-                            setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
-                            lastMove = true;
-                        }
+                if (king != null) {
+                    if (king.canCastle(board, false)) {
+                        board.removePiece(rook);
+                        board.removePiece(king);
+                        rook.setLocation(kingsCoordinates);
+                        king.setLocation(rooksCoordinates);
+                        king.setMoved(true);
+                        rook.setMoved(true);
+                        board.addPiece(rook);
+                        board.addPiece(king);
+                        board.setKing(rooksCoordinates, getPlayerToMove());
+                        setPlayerToMove(getPlayerToMove() == Player.WHITE ? Player.BLACK : Player.WHITE);
+                        lastMove = true;
                     }
                 }
             }

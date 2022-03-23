@@ -1,11 +1,10 @@
 package ax.ha.tdd.chess.engine.pieces;
 
-import ax.ha.tdd.chess.engine.Coordinates;
-import ax.ha.tdd.chess.engine.Game;
-import ax.ha.tdd.chess.engine.Player;
+import ax.ha.tdd.chess.engine.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QueenTest {
     @Test
@@ -75,7 +74,7 @@ public class QueenTest {
     }
 
     @Test
-    public void testQueenEatQueen(){
+    public void testQueenEatQueenAndSkipOverCheckMate(){
         Game game = new Game();
         game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,1)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
@@ -99,9 +98,11 @@ public class QueenTest {
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
+        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
 
         game = new Game();
         game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(3,1)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
         str = "d2-d4";
         game.move(str);
@@ -119,13 +120,11 @@ public class QueenTest {
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-d7";
+        str = "d1-d8";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d8-d7";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
+        //there is a weird case here where it should be check mate...
     }
 }
