@@ -74,7 +74,7 @@ public class QueenTest {
     }
 
     @Test
-    public void testQueenEatQueenAndSkipOverCheckMate(){
+    public void testQueenEatQueen(){
         Game game = new Game();
         game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,1)));
         assertEquals(game.getPlayerToMove(), Player.WHITE);
@@ -125,6 +125,5 @@ public class QueenTest {
         assertEquals(game.getLastMoveResult(), "Last move was successful");
         assertEquals(game.getPlayerToMove(), Player.BLACK);
         assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
-        //there is a weird case here where it should be check mate...
     }
 }

@@ -28,13 +28,20 @@ public class King extends ChessPiece {
         if(Math.abs(location.getX()-destination.getX()) <= 1 || Math.abs(location.getY()-destination.getY()) <= 1){
             //if there space to move to is empty
             if(chessboard.getPiece(destination) == null){
-                return !ChessPieceThreatened.isThreatened(chessboard, destination, getPlayer());
+                chessboard.removePiece(this);
+                boolean threatened = !ChessPieceThreatened.isThreatened(chessboard, destination, getPlayer());
+                chessboard.addPiece(this);
+                return threatened;
+
             }
             //if it's trying to eat another piece
             else{
+                chessboard.removePiece(this);
                 //check if the piece is a different color and return the result
-                return (chessboard.getPiece(destination).getPlayer() != player) &&
+                boolean threatened =  (chessboard.getPiece(destination).getPlayer() != player) &&
                         !ChessPieceThreatened.isThreatened(chessboard, destination, getPlayer());
+                chessboard.addPiece(this);
+                return threatened;
             }
         }
         return false;

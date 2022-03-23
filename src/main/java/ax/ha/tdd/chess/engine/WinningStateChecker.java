@@ -48,7 +48,6 @@ public class WinningStateChecker {
     private static boolean canMove(Chessboard chessboard, Player player){
         //get the king of the right color
         King king = chessboard.getKing(player);
-        System.out.println(king.getPlayer().getSymbol());
         //check if it can move anywhere
         for(int i= -1; i < 2; i++){
             for(int j = -1; j < 2; j++){
@@ -57,7 +56,6 @@ public class WinningStateChecker {
                             king.getLocation().getX()+j > -1 && king.getLocation().getX()+j < 8){
                         if(king.canMove(chessboard,
                                 new Coordinates(king.getLocation().getX()+j, king.getLocation().getY()+i))){
-                            System.out.println(player.getSymbol() +" i" + i + " j" + j);
                             return false;
                         }
                     }

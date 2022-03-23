@@ -90,4 +90,43 @@ public class WinningStateCheckerTest {
         assertEquals(WinningState.CHECKMATE, WinningStateChecker.checkState(game.getBoard(),Player.WHITE));
     }
 
+    @Test
+    public void testForSkipOverCheckMate(){
+        Game game = new Game();
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(3,1)));
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        String str = "d2-d4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "e7-e5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d4-e5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        str = "a7-a5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        str = "d1-d8";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
+        str = "a5-a4";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
+        str = "c1-g5";
+        game.move(str);
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        assertEquals(WinningState.CHECKMATE, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
+    }
+
 }
