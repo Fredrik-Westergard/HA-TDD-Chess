@@ -25,7 +25,7 @@ public class King extends ChessPiece {
     @Override
     public boolean canMove(Chessboard chessboard, Coordinates destination) {
         //if it's only trying to move one space
-        if(Math.abs(location.getX()-destination.getX()) <= 1 || Math.abs(location.getY()-destination.getY()) <= 1){
+        if(Math.abs(location.getX()-destination.getX()) <= 1 && Math.abs(location.getY()-destination.getY()) <= 1){
             //if there space to move to is empty
             if(chessboard.getPiece(destination) == null){
                 //remove the king to be able to properly check if that space is threatened

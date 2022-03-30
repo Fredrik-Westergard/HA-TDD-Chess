@@ -1,5 +1,6 @@
 package ax.ha.tdd.chess.engine;
 
+import ax.ha.tdd.chess.engine.pieces.Rook;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,5 +56,26 @@ public class GameTest {
         str = "AA-AA";
         game.move(str);
         assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
+    }
+
+    @Test
+    public void testCastlingValid(){
+        Game game = new Game();
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(1,7)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(2,7)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(3,7)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,7)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(6,7)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(1,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(2,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(3,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,0)));
+        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(6,0)));
+        game.move("O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        game.move("O-O-O");
+        assertEquals(game.getLastMoveResult(), "Last move was successful");
+        assertEquals(game.getPlayerToMove(), Player.WHITE);
     }
 }

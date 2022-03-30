@@ -3,127 +3,65 @@ package ax.ha.tdd.chess.engine.pieces;
 import ax.ha.tdd.chess.engine.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class QueenTest {
     @Test
     public void testQueenMoveValid(){
-        Game game = new Game();
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        String str = "e2-e4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d7-d5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-g4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
+        //multiple spaces diagonally
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(1,7)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,1)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,7)));
+        //one space diagonally
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,5)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,3)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,5)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,3)));
+        //multiple spaces vertically
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,4)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,4)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,0)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,7)));
+        //one space vertically
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,3)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,4)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,4)));
 
-        game = new Game();
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d2-d4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d7-d5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-d3";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
     }
 
     @Test
     public void testQueenMoveInvalid(){
-        Game game = new Game();
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        String str = "e2-e4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d7-d5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-d4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-
-        game = new Game();
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d2-d4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d7-d5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-e3";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was unsuccessful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,5)));
+        assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
+        assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,6)));
+        assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,1)));
     }
 
     @Test
-    public void testQueenEatQueen(){
-        Game game = new Game();
-        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,1)));
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        String str = "e2-e4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d7-d5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-g4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "d8-d7";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "g4-d7";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
-
-        game = new Game();
-        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(5,0)));
-        game.getBoard().removePiece(game.getBoard().getPiece(new Coordinates(3,1)));
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d2-d4";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "e7-e5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d4-e5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        str = "a7-a5";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.WHITE);
-        str = "d1-d8";
-        game.move(str);
-        assertEquals(game.getLastMoveResult(), "Last move was successful");
-        assertEquals(game.getPlayerToMove(), Player.BLACK);
-        assertEquals(WinningState.CHECK, WinningStateChecker.checkState(game.getBoard(),Player.BLACK));
+    public void testQueenEatQueens(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(4,5)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(0,0)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(2,6)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(1,4)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(6,4)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(6,2)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(7,7)));
+        chessboard.addPiece(new Queen(Player.BLACK, new Coordinates(4,1)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(2,6)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(1,4)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(6,4)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(6,2)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,7)));
+        assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,1)));
     }
 }

@@ -194,8 +194,11 @@ public class ChessPieceThreatened {
                         //if there is a piece in the way
                         if((piece = chessboard.getPiece(new Coordinates(coordinates.getX()+i, coordinates.getY()+i))) != null){
                             //and it's a pawn, bishop or queen of the opposite color, return true
-                            if(piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
-                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))){
+                            if(piece.getPlayer() != player && ((((player == Player.BLACK &&
+                                    piece.getPieceType() == PieceType.PAWN) ||
+                                    (piece.getPieceType() == PieceType.KING)) && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP ||
+                                    piece.getPieceType() == PieceType.QUEEN))){
                                 return true;
                             }
                             //else flip obstacle flag
@@ -212,8 +215,11 @@ public class ChessPieceThreatened {
                         //if there is a piece in the way
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() + i))) != null) {
                             //and it's a pawn, bishop or queen of the opposite color, return true
-                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
-                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
+                            if (piece.getPlayer() != player && ((((player == Player.BLACK &&
+                                    piece.getPieceType() == PieceType.PAWN) ||
+                                    (piece.getPieceType() == PieceType.KING)) && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP ||
+                                    piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             }
                             //else flip obstacle flag
@@ -233,8 +239,11 @@ public class ChessPieceThreatened {
                         //if there's a piece in the way
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() + i, coordinates.getY() - i))) != null) {
                             //and it's a pawn, bishop or queen of the opposite color, return true
-                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
-                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
+                            if (piece.getPlayer() != player && ((((player == Player.WHITE &&
+                                    piece.getPieceType() == PieceType.PAWN) ||
+                                    (piece.getPieceType() == PieceType.KING)) && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP ||
+                                    piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             }
                             //else flip obstacle flag
@@ -251,8 +260,11 @@ public class ChessPieceThreatened {
                         //if there's a piece in the way
                         if ((piece = chessboard.getPiece(new Coordinates(coordinates.getX() - i, coordinates.getY() - i))) != null) {
                             //and it's a pawn, bishop or queen of the opposite color, return true
-                            if (piece.getPlayer() != player && ((piece.getPieceType() == PieceType.PAWN && i == 1) ||
-                                    (piece.getPieceType() == PieceType.BISHOP || piece.getPieceType() == PieceType.QUEEN))) {
+                            if (piece.getPlayer() != player && ((((player == Player.WHITE &&
+                                    piece.getPieceType() == PieceType.PAWN) ||
+                                    (piece.getPieceType() == PieceType.KING)) && i == 1) ||
+                                    (piece.getPieceType() == PieceType.BISHOP ||
+                                    piece.getPieceType() == PieceType.QUEEN))) {
                                 return true;
                             }
                             //else flip obstacle flag
