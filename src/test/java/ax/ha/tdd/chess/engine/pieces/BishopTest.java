@@ -10,15 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BishopTest {
     @Test
-    public void testMoveBishopValid(){
+    public void testMoveBishopValidMultipleSpaces(){
         Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
-        //multiple spaces
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(1,7)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,1)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,7)));
-        //one space
+    }
+
+    @Test
+    public void testMoveBishopValidOneSpaces(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,5)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,3)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,5)));
@@ -26,24 +30,37 @@ public class BishopTest {
     }
 
     @Test
-    public void testBishopMoveInvalid(){
+    public void testBishopMoveInvalidNotDiagonalLongMove(){
         Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
-        //not diagonal long move
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,1)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(2,7)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,2)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(6,7)));
-        //no move
-        assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,4)));
-        //not diagonal one space
+    }
+
+    @Test
+    public void testBishopMoveInvalidNotDiagonalOneSpace(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,4)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,3)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,4)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
+    }
 
+    @Test
+    public void testBishopMoveInvalidNoMove(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
+        assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,4)));
+    }
+
+    @Test
+    public void testBishopMoveInvalidNoJumpOverPiece(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(3,3)));
-        //no jump over pieces
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
     }
 
@@ -69,17 +86,19 @@ public class BishopTest {
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(4,3)));
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(4,5)));
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(5,4)));
-        //bishops vertically/horizontally around
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,4)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,3)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,4)));
+    }
 
-        //no jump over piece
+    @Test
+    public void testBishopCantEatBishopNoJumpOverPiece(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Bishop(Player.WHITE, new Coordinates(4,4)));
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(0,0)));
         chessboard.addPiece(new Bishop(Player.BLACK, new Coordinates(3,3)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
     }
-
 
 }

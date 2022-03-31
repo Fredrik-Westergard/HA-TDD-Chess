@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightTest {
     @Test
-    public void testKnightMoveValid(){
+    public void testKnightMoveValidStartingBoard(){
         Chessboard chessboard = Chessboard.startingBoard();
         assertTrue(chessboard.getPiece(new Coordinates(1,7)).canMove(chessboard, new Coordinates(0,5)));
         assertTrue(chessboard.getPiece(new Coordinates(1,7)).canMove(chessboard, new Coordinates(2,5)));
@@ -20,8 +20,11 @@ public class KnightTest {
         assertTrue(chessboard.getPiece(new Coordinates(1,0)).canMove(chessboard, new Coordinates(2,2)));
         assertTrue(chessboard.getPiece(new Coordinates(6,0)).canMove(chessboard, new Coordinates(5,2)));
         assertTrue(chessboard.getPiece(new Coordinates(6,0)).canMove(chessboard, new Coordinates(7,2)));
+    }
 
-        chessboard = new Chessboard();
+    @Test
+    public void testKnightMoveValidInTheMiddle(){
+        Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Knight(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard, new Coordinates(3,2)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard, new Coordinates(5,2)));

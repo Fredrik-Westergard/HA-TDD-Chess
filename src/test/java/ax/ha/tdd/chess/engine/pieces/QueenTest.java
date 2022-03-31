@@ -7,25 +7,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class QueenTest {
     @Test
-    public void testQueenMoveValid(){
+    public void testQueenMoveValidMultipleSpacesDiagonally(){
         Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
-        //multiple spaces diagonally
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,0)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(1,7)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,1)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,7)));
-        //one space diagonally
+    }
+
+    @Test
+    public void testQueenMoveValidOneSpaceDiagonally(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,5)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,3)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(3,5)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,3)));
-        //multiple spaces vertically
+
+    }
+
+    @Test
+    public void testQueenMoveValidMultipleSpacesStraight(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,0)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,7)));
-        //one space vertically
+    }
+
+    @Test
+    public void testQueenMoveValidOneSpaceStraight(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Queen(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,3)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,4)));

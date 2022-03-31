@@ -26,8 +26,11 @@ public class PawnTest {
         assertFalse(chessboard.getPiece(new Coordinates(0,1)).canMove(chessboard, new Coordinates(0,4)));
         assertFalse(chessboard.getPiece(new Coordinates(0,6)).canMove(chessboard, new Coordinates(0,6)));
         assertFalse(chessboard.getPiece(new Coordinates(0,6)).canMove(chessboard, new Coordinates(0,7)));
+    }
 
-        chessboard = new Chessboard();
+    @Test
+    public void testIsMovePawnInvalidNoSkipOver(){
+        Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Pawn(Player.WHITE, new Coordinates(4,4)));
         assertFalse(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard, new Coordinates(4,5)));
     }

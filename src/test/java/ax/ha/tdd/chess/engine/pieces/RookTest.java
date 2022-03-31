@@ -10,15 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RookTest {
     @Test
-    public void testIsMoveRookValid(){
+    public void testIsMoveRookValidMultipleSpaces(){
         Chessboard chessboard = new Chessboard();
         chessboard.addPiece(new Rook(Player.WHITE, new Coordinates(4,4)));
-        //multiple spaces
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(0,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(7,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,0)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,7)));
-        //one space
+    }
+
+    @Test
+    public void testIsMoveRookValidOneSpace(){
+        Chessboard chessboard = new Chessboard();
+        chessboard.addPiece(new Rook(Player.WHITE, new Coordinates(4,4)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,5)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(4,3)));
         assertTrue(chessboard.getPiece(new Coordinates(4,4)).canMove(chessboard,new Coordinates(5,4)));
