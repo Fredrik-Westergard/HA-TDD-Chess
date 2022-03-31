@@ -1,7 +1,10 @@
 package ax.ha.tdd.chess.engine;
 
 import ax.ha.tdd.chess.console.ChessboardWriter;
-import ax.ha.tdd.chess.engine.pieces.*;
+import ax.ha.tdd.chess.engine.pieces.ChessPiece;
+import ax.ha.tdd.chess.engine.pieces.King;
+import ax.ha.tdd.chess.engine.pieces.PieceType;
+import ax.ha.tdd.chess.engine.pieces.Rook;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

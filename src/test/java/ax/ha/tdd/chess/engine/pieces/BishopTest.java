@@ -2,11 +2,11 @@ package ax.ha.tdd.chess.engine.pieces;
 
 import ax.ha.tdd.chess.engine.Chessboard;
 import ax.ha.tdd.chess.engine.Coordinates;
-import ax.ha.tdd.chess.engine.Game;
 import ax.ha.tdd.chess.engine.Player;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BishopTest {
     @Test
